@@ -1,72 +1,32 @@
 void main() {
-  //Menu : Burger: 15 minutes, Pizza: 30 minutes , fries: 5 minutes , nuggets: 10 minutes
+  // 0.02 Taxes
   
-  List<Map<String, dynamic>> Resturant_Orders = [
-    {"ID_number": 1, "Status": "Ready", "Item": "Burger"},
-    {"ID_number": 2, "Status": "Canceled", "Item": "Pizza"},
-    {"ID_number": 3, "Status": "VIP", "Item": "Fries"},
-    {"ID_number": 4, "Status": "Ready", "Item": "Nuggets"},
-    {"ID_number": 5, "Status": "Canceled", "Item": "Salad"},
-    {"ID_number": 6, "Status": "VIP", "Item": "Mansaf"},
-    {"ID_number": 7, "Status": "Ready", "Item": "Burger"},
+  List<Map<String, dynamic>> RestaurantOrders = [
+    {"OrderID": 1, "OrderName": "Chocolate Bar", "Price": 35},
+    {"OrderID": 2, "OrderName": "Soda Can", "Price": 20},
+    {"OrderID": 3, "OrderName": "Bag of Chips", "Price": 25},
+    {"OrderID": 4, "OrderName": "Gum Pack", "Price": 10},
+    {"OrderID": 5, "OrderName": "Bottle of Water", "Price": 15},
+    {"OrderID": 6, "OrderName": "Energy Drink", "Price": 40},
+    {"OrderID": 7, "OrderName": "Granola Bar", "Price": 30}
   ];
 
-  // VIP Orders
-  for (int i = 0; i < Resturant_Orders.length; i++) {
-    if (Resturant_Orders[i]["Status"] == "VIP") {
-      print("Start with This order ${Resturant_Orders[i]["ID_number"]} It is A VIP Order");
-      if (Resturant_Orders[i]["ID_number"] == 4)
-    {
-      print("Alert for the kitchen this order might take long time please be Faster");
-    }
-      
-      switch (Resturant_Orders[i]["Item"]) {
-        case "Burger":
-          print("🍔 Preparing a Burger, It Should take 15 minutes");
-          break;
-        case "Pizza":
-          print("🍕 Preparing a Pizza, It Should take 30 minutes");
-          break; 
-        case "Fries":
-          print("🍟 Preparing Fries, It Should take 5 minutes");
-          break;
-        case "Nuggets":
-          print("🍗 Preparing Nuggets, It Should take 10 minutes");
-          break; 
-        default:
-          print("⚠️ Unknown item ${Resturant_Orders[i]["Item"]}, Please investigate.");
-      }
-    }
+  for (int i = 0; i < RestaurantOrders.length; i++) {
+    int id = RestaurantOrders[i]["OrderID"];
+    int price = RestaurantOrders[i]["Price"];
+    String name = RestaurantOrders[i]["OrderName"];
+
+    // Order name is null
+    TaskPricewithTax(id: id, prices: price);
+    // Order name is not null
+    TaskPricewithTax(id: id, prices: price, name: name);
   }
-  //Normal Orders
-  for (int i = 0; i < Resturant_Orders.length; i++) {
-    if (Resturant_Orders[i]["Status"] == "Canceled") {
-    print(" This order is canceled ${Resturant_Orders[i]["ID_number"]}, Please dont make it");
+}
+
+TaskPricewithTax({required int id, required int prices, String? name}) {
+  if (name == null) {
+    print("The order ID is $id, it has a price of $prices, and the price after taxes is ${prices + (0.02 * prices)}.");
+  } else {
+    print("The order '$name', with ID $id, has a price of $prices, and the price after taxes is ${prices + (0.02 * prices)}.");
   }
-    if (Resturant_Orders[i]["Status"] == "Ready") {
-      print("Prepare this order ${Resturant_Orders[i]["ID_number"]} It is A Normal Order");
-      if (Resturant_Orders[i]["ID_number"] == 4)
-    {
-      print("Alert for the kitchen this order might take long time please be Faster");
-    }
-      
-      switch (Resturant_Orders[i]["Item"]) {
-        case "Burger":
-          print("🍔 Preparing a Burger, It Should take 15 minutes");
-          break;
-        case "Pizza":
-          print("🍕 Preparing a Pizza, It Should take 30 minutes");
-          break; 
-        case "Fries":
-          print("🍟 Preparing Fries, It Should take 5 minutes");
-          break;
-        case "Nuggets":
-          print("🍗 Preparing Nuggets, It Should take 10 minutes");
-          break; 
-        default:
-          print("⚠️ Unknown item ${Resturant_Orders[i]["Item"]}, Please investigate.");
-      }
-    }
-  }
-  
 }
